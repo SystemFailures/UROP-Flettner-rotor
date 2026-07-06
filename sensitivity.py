@@ -39,15 +39,15 @@ def plot():
     plt.scatter(D[np.where(g == min(g))],getSum(D[np.where(g == min(g))]),marker='x')
     
 
-    global w
-    widths = np.linspace(0.004,0.014,20)
-    optDs = np.zeros_like(widths)
-    optds = np.zeros_like(widths)
-    optss = np.zeros_like(widths)
-    optgs = np.zeros_like(widths)
+    global t
+    thicknesses = np.linspace(0.0012,0.0023,20)
+    optDs = np.zeros_like(thicknesses)
+    optds = np.zeros_like(thicknesses)
+    optss = np.zeros_like(thicknesses)
+    optgs = np.zeros_like(thicknesses)
 
-    for i in range(len(widths)):
-        w = widths[i]
+    for i in range(len(thicknesses)):
+        t = thicknesses[i]
         recalcI()
         s = getSensitivity(D)
         d= getDisplacement(D)
@@ -75,9 +75,9 @@ def plot():
     plt.plot(optDs,optgs,label="Lowest sum for widths [4,14]mm")
     plt.plot(optDs,optss,label="Sensitivity at optimum sum")
     plt.plot(optDs,optds,label="Displacement at optimum sum")
-    for i in range(len(widths)):
+    for i in range(len(thicknesses)):
         if i%4 == 0:
-            plt.annotate(round(widths[i]*1000,2),(optDs[i],optgs[i]),rotation=90)
+            plt.annotate(round(thicknesses[i]*1000,2),(optDs[i],optgs[i]),rotation=90)
             plt.scatter(optDs[i],optgs[i],marker='x',color='red')
 
 
