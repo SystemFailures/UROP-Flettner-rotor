@@ -33,9 +33,9 @@ def plot():
     g=s+d
     
     plt.figure()
-    plt.plot(D,s,label="Sensitivity (x10^-7)")
-    plt.plot(D,d,label="Displacement of rotor centre (m)")
-    plt.plot(D,g)
+    #plt.plot(D,s,label="Sensitivity (x10^-7)")
+    #plt.plot(D,d,label="Displacement of rotor centre (m)")
+    #plt.plot(D,g)
     plt.scatter(D[np.where(g == min(g))],getSum(D[np.where(g == min(g))]),marker='x')
     
 
@@ -72,15 +72,17 @@ def plot():
         optds.append(d[optLoc])
         optss.append(s[optLoc])'''
     
-    plt.plot(optDs,optgs,label="Lowest sum for widths [4,14]mm")
+    plt.plot(optDs,optgs,label="Lowest sum for thicknesses [1.2,2.3]mm")
     plt.plot(optDs,optss,label="Sensitivity at optimum sum")
     plt.plot(optDs,optds,label="Displacement at optimum sum")
     for i in range(len(thicknesses)):
-        if i%4 == 0:
+        if i%3 == 0:
             plt.annotate(round(thicknesses[i]*1000,2),(optDs[i],optgs[i]),rotation=90)
             plt.scatter(optDs[i],optgs[i],marker='x',color='red')
 
 
+    plt.xlabel("Distance between strain gauge centres (m)")
+    plt.ylabel("Strain (x10^-7)    OR   Displacement (mm)")
     plt.legend()
     plt.show()
 
