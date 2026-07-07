@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 
 
 
-w= 0.006
+w= 0.009
 t = 0.00165
 E = 190*1e9
 H = 0.135
-F = 1.6
+F = 1.94
 
 I = (w* t**3)/12
 
@@ -33,14 +33,14 @@ def plot():
     g=s+d
     
     plt.figure()
-    plt.plot(D,s,label="Sensitivity (x10^-7)")
-    plt.plot(D,d,label="Displacement of rotor centre (m)")
-    plt.plot(D,g)
+    #plt.plot(D,s,label="Sensitivity (x10^-7)")
+    #plt.plot(D,d,label="Displacement of rotor centre (m)")
+    #plt.plot(D,g)
     plt.scatter(D[np.where(g == min(g))],getSum(D[np.where(g == min(g))]),marker='x')
     
 
     global w
-    widths = np.linspace(0.004,0.014,20)
+    widths = np.linspace(0.002,0.014,20)
     optDs = np.zeros_like(widths)
     optds = np.zeros_like(widths)
     optss = np.zeros_like(widths)
@@ -72,7 +72,7 @@ def plot():
         optds.append(d[optLoc])
         optss.append(s[optLoc])'''
     
-    plt.plot(optDs,optgs,label="Lowest sum for widths [4,14]mm")
+    plt.plot(optDs,optgs,label="Lowest sum for widths [2,14]mm")
     plt.plot(optDs,optss,label="Sensitivity at optimum sum")
     plt.plot(optDs,optds,label="Displacement at optimum sum")
     for i in range(len(widths)):
@@ -80,7 +80,8 @@ def plot():
             plt.annotate(round(widths[i]*1000,2),(optDs[i],optgs[i]),rotation=90)
             plt.scatter(optDs[i],optgs[i],marker='x',color='red')
 
-
+    plt.xlabel("Distance between strain gauge centres (m)")
+    plt.ylabel("Strain (x10^-7)   OR   Displacement (m)")
     plt.legend()
     plt.show()
 
